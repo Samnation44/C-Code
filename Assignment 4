@@ -1,0 +1,26 @@
+#include <stdio.h>
+float get_num(float x);
+float halve_num(float y);
+float print_num(float z);
+float main() {
+    float a;
+    a=get_num(a);
+    a=halve_num(a);
+    a=print_num(a);
+    
+    return 0;
+}
+float get_num(float x){
+    printf("Enter number:");
+    scanf("\n%f",&x);
+    return x;
+}
+float halve_num(float y) {
+    float F;
+    F=y/2;
+    return F;
+}
+float print_num(float z) {
+    printf("The answer is: %.3f",z);
+    return(0);
+}
