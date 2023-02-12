@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <math.h>
+int get_num(void);
+int add_five(int num);
+int print_result(int num);
+int digit_gitter( int num,int power);
+
+int main() {
+    int x;
+    int sum;
+    x=get_num();
+    sum=add_five(x);
+    print_result(sum);
+    return 0;}
+int get_num(void){
+    int result;
+    printf("Enter an integer:");
+    scanf("\n%d",&result);
+    return result;}
+int add_five(int num){
+    int result;
+    result=digit_gitter(num,0)+digit_gitter(num,1)+digit_gitter(num,2)+digit_gitter(num,3)+digit_gitter(num,4);
+       return result;}
+int digit_gitter(int num,int power){
+    int x;
+    int result;
+    x=pow(10,power);
+    result=(num/x)%10;
+    return result;}
+int print_result(int num){
+    printf("The sum of the last 5 digits is: %d",num);
+    return;}
