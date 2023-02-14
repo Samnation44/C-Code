@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <math.h>
+#define PI 3.14159
+#define G -9.8
+void input_values(float* v,float* angle,float* height);
+void find_components(float v,float angle,float* vx,float* vy);
+float time_of_flight(float vy,float y);
+float find_range(float t_flight,float vx);
+void print_results(float v,float angle,float height,float range,float t_flight);
+float main() {
+    float v;
+    float angle;
+    float vx;
+    float vy;
+    float t_flight;
+    float range;
+    float height;
+    input_values(&v,&angle,&height);
+    find_components(v,angle,&vx,&vy);
+    t_flight=time_of_flight(vy,height);
+    range=find_range(t_flight,vx);
+    print_results(v,angle,height,range,t_flight);
+    
+    return 0;
+}
+void input_values(float* v,float* angle,float* height){
+    printf("Enter the initial velocity in m/s:");
+    scanf("%f",&*v);
+    printf("\nEnter the angle in degrees:");
+    scanf("%f",&*angle);
+    printf("\nEnter the height in meters:");
+    scanf("%f",&*height);
+    return;}
+void find_components(float v,float angle,float* vx,float* vy){
+    *vx=v*cos(angle*PI/180);
+    *vy=v*sin(angle*PI/180);
+    return;
+}
+float time_of_flight(float vy,float y){
+    float t;
+    float a;
+    float b;
+    float c;
+    a=G/2;
+    b=vy;
+    c=-y;
+    t=(-b-sqrt(b*b-(4*a*c)))/(2*a);
+    return t;
+}
+float find_range(float t_flight,float vx){
+    float r;
+    r=t_flight*vx;
+    return r;
+}
+void print_results(float v,float angle,float height,float range,float t_flight){
+    printf("Velocity:%f\nAngle:%f\nHeight:%f\nRange:%f\ntime of flight:%f\n",v,angle,height,range,t_flight);
+    return;
+}
