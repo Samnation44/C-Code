@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <math.h>
+#define PI 3.14159
+void description();
+int get_choice();
+float get_polar_data(float*r,float*theta);
+void convert_to_rect(float r,float theta,float*x,float*y);
+void print_pr_result(float x,float y);
+void get_rect_data(float*x,float*y);
+void convert_to_polar(float x,float y,float*r,float*theta);
+void print_rp_result(float r,float theta);
+int main(void) {
+    int choice;		//polar or rect.
+    float r;        //radius
+    float theta;    //angle
+    float x;
+    float y;
+  description();          //describes stuff
+  choice = get_choice();  //gets 1 or 2
+  if (choice == 1)     {         //if 1, do this:
+    get_polar_data(&r, &theta);	           //gets r and theta
+    convert_to_rect(r, theta, &x, &y);     //converts to x and y
+    print_pr_result(x, y);        }         //prints x and y
+    else {                                   //if not, do this:
+    get_rect_data(&x, &y);                //gets x and y
+    convert_to_polar(x, y, &r, &theta);   //converts to r and theta
+    print_rp_result(r, theta);  }          //prints r and theta
+    return 0;}
+void description(){
+    printf("This program will convert polar coordinates to\nrectangular coordinates or rectangular\ncoordinates to polar coordinates.\n\n");
+    return;}
+int get_choice(){
+    int a;
+    printf("Enter 1 for polar to rectangular\nEnter 2 for rectangular to polar\n");
+    scanf("%d",&a);
+    return a;
+}
+float get_polar_data(float*r,float*theta){
+    float a,b;
+    printf("Enter the value for r(meters):");
+    scanf("%f",&a);
+    printf("Enter the value for theta(degrees):");
+    scanf("%f",&b);
+    *theta=b;
+    *r=a;
+    return(0);}
+void convert_to_rect(float r,float theta,float*x,float*y){
+    *x=r*cos(theta*PI/180);
+    *y=r*sin(theta*PI/180);
+return;}
+void print_pr_result(float x,float y){
+    printf("x = %.2f and y = %.2f",x,y);
+return;}
+void get_rect_data(float*x,float*y){
+    float a,b;
+        printf("Enter the value of x:");
+    scanf("%f",&a);
+    printf("Enter the value of y:");
+    scanf("%f",&b);
+    *x=a;
+    *y=b;
+    return;}
+void convert_to_polar(float x,float y,float*r,float*theta){
+    *r=sqrt(x*x+y*y);
+    *theta=(atan(y/x))*180/PI;
+    return;}
+void print_rp_result(float r,float theta){
+    printf("r = %.2f and theta = %.2f",r,theta);
+    return;}
