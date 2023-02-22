@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <math.h>
+void get_coeff(float* a,float* b,float*c);
+void one_root(float a,float b);
+void two_roots(float a,float b,float c);
+int main() {
+    float a,b,c;
+   get_coeff(&a,&b,&c);
+   if (b*b-(4*a*c) == 0){
+    one_root(a,b);   
+    printf("\n%.2f\n%.2f\n%.2f",a,b,c);
+   }
+   else {
+       two_roots(a,b,c);
+       //printf("\n%.2f\n%.2f\n%.2f",a,b,c);
+   }
+    return 0;
+}
+void get_coeff(float*a,float*b,float*c){
+    float x,y,z;
+    printf("Enter a, b, and c:\n");
+    scanf("%f%f%f",&*a,&*b,&*c);
+   // printf("%f%f%f",*a,*b,*c);
+    return; }
+void one_root(float a,float b){
+    float x;
+    x=-b/(2*a);
+    printf("The one root is: %+.2f",x);
+    return;}
+void two_roots(float a,float b,float c){
+    float x1,x2,x3;
+    float disc=b*b-(4*a*c);
+    if (disc > 0){
+    x1=(-b+sqrt(disc))/(2*a);
+    x2=(-b-sqrt(disc))/(2*a);  
+    printf("The roots are: %f and %f",x1,x2);
+    }
+    else {
+        x1=-b/(2*a);
+        x2=sqrt(-disc)/(2*a);
+        x3=-sqrt(-disc)/(2*a);
+        printf("The roots are: %.2f %+.2fi and %.2f %+.2fi",x1,x2,x1,x3);
+    }
+    
+    
+    return;}
