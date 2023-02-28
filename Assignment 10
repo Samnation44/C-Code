@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int rand_num(){
+    srand(time(NULL));
+    int x=rand()%21;
+    return x;}
+void intro(){
+    printf("Try to guess a number (from 0 to 20) within 5 tries");
+}
+void get_guess(int* guess,int result){
+    printf("Enter guess:");
+    scanf("%d",&*guess);
+    return;}
+int check(int guess,int number);
+void exit_message(int result,int number);
+int main() {
+    int guess,number,result;
+    number=rand_num();
+    intro();
+   int t=rand_num();
+    printf("\n%d",t);
+    get_guess()
+    return 0;}
