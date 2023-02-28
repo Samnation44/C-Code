@@ -1,0 +1,47 @@
+#include <stdio.h>
+void get_values(int* a,int*b,int*c);
+void swap(int*x,int*y);
+void printx(int a,int b,int c);
+void sorter(int*a,int*b,int*c);
+
+int main() {
+int a;
+int b;
+int c;
+
+get_values(&a,&b,&c);
+printf("%d%d%d",a,b,c);
+sorter(&a,&b,&c);
+printx(a,b,c);
+    return 0;}
+    
+void get_values(int*a,int*b,int*c){
+    int x,y,z;
+    printf("Enter the first integer:");
+    scanf("%d",&*a);
+    printf("Enter the second integer:");
+    scanf("%d",&*b);
+    printf("Enter the third integer:");
+    scanf("%d",&*c);
+    return(0);}
+
+void sorter(int*a,int*b,int*c){
+    if (*a<*b) {
+    swap(&*a,&*b);    
+    }
+    if (*a<*c) {
+    swap(&*a,&*c);
+    }
+    if (*b<*c){
+        swap(&*b,&*c);
+    }
+return;}
+void printx(int a,int b,int c){
+    printf("From largest to smallest:\n%d\n%d\n%d",a,b,c);
+    return;}
+    
+void swap(int*x,int*y){
+    int t=*x;
+    *x=*y;
+    *y=t;
+    return;}
