@@ -16,25 +16,57 @@ void intro(){
 void get_guess(int* guess,int result){
     switch (result){
         case HI:
-        printf("\nYour guess is too high.\nTry again:");
+        printf("\nYour guess is too high. Try again:");
         scanf("%d",&*guess);
         break;
         case LO:
-        printf("\nYour guess is too low.\nTry again:");
+        printf("\nYour guess is too low. Try again:");
         scanf("%d",&*guess);
         break;
         case INITIAL:
-        printf("Enter your guess:");
+        printf("\nEnter your guess:");
         scanf("%d",&*guess);
         break;
-    return;}
-int check(int guess,int number);
-void exit_message(int result,int number);
+return;}}
+int check(int guess,int number){
+    int a;
+    //printf("Guess:%d   Number:%d",guess,number);
+    if (guess>number){
+        a=HI;}
+    if (guess<number){
+        a=LO;}
+    if (guess == number){
+        a=MATCH;} 
+    return(a); }
+void exit_message(int result,int number){
+    if (result == 0){
+        printf("\nYou win! The number was %d",number);}
+    else{
+        printf("\nYou baboon! You've failed miserably! (The number was %d)",number);
+    }
+}
 int main(void) {
     int guess,number,result;
     number=rand_num();
     intro();
     int t=rand_num();
-    printf("\n%d",t);
-    get_guess(&number,INITIAL);
-    return (0);}
+    //printf("\n%d",t);
+    get_guess(&guess,INITIAL);
+    result=check(guess,number);
+    if (result != MATCH){
+        get_guess(&guess,result);
+        result=check(guess,number);
+        }
+    if (result != MATCH){
+        get_guess(&guess,result);
+        result=check(guess,number);}
+    if (result != MATCH){
+        get_guess(&guess,result);
+        result=check(guess,number);
+        }
+    if (result != MATCH){
+        get_guess(&guess,result);
+        result=check(guess,number);
+       }
+    exit_message(result,number);
+    return (0); }
