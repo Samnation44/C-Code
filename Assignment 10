@@ -11,7 +11,7 @@ int rand_num(){
     int x=rand()%21;
     return x;}
 void intro(){
-    printf("Try to guess a number (from 0 to 20) within 5 tries");
+    printf("You get 5 tries to guess a number between 0 and 20");
 }
 void get_guess(int* guess,int result){
     switch (result){
