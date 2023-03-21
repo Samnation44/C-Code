@@ -1,0 +1,31 @@
+#include <stdio.h>
+int get_number(){
+    int num;
+    do{
+        printf("Enter the decimal number (from 0 to 1023):");
+        scanf("\n%d",&num);
+    }while (num>1023 || num<0);
+return (num);}
+int ipow(int x){
+    int t=1,i;
+    for(i=1;i<=x;i++){
+        t=t*2;
+    }
+return (t);}
+void convert(int number){
+    int i;
+    for(i=9;i>=0;i--){
+        if (number>=ipow(i)){
+        printf("1");
+        number=number-ipow(i);}
+        else{
+            printf("0");}}
+    
+return;}
+
+
+int main() {
+   int number=get_number();
+      convert(number);
+   int x=ipow(3);
+      return 0;}
