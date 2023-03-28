@@ -1,0 +1,25 @@
+#include <stdio.h>
+void input(float*x,int*num_terms);
+float e_x(float x,int num_terms);
+void print(float x,float result);
+float fpow(float base,int exp);
+int fact(int num);
+
+int main() {
+    float x,result;
+    int num_terms;
+    input(&x,&num_terms);
+
+
+    return 0;
+}
+/****************************/
+void input(float*x,int*num_terms){
+    do{
+        printf("Enter the power to which e is to be raised:");
+        scanf("%f"&*x);
+    }while(x<=0);
+    do{printf("Enter the number of desired terms (from 1 to 12 inclusive):");
+        scanf("%d",&*num_terms);
+    }while(num_terms>12||num_terms<0);
+}
