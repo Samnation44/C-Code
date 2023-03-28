@@ -1,0 +1,31 @@
+#include <stdio.h>
+int get_value();
+void output(int num);
+
+int main() {
+   int num=get_value();
+   output(num);
+   return 0;
+}
+int get_value(){
+   int num;
+   do{
+    printf("Enter the number (between 0 and 30 inclusive):");
+    scanf("%d",&num);
+    }while(num<0||num>30);
+    return (num);
+}
+
+void output(int num){
+    int i,n,x=num;
+    for(i=x;i>=0;i--){
+        for(n=x;n>=0;n--){
+            printf("%3d",num);
+            num--;
+        }
+        x--;
+        num=x;
+        printf("\n");
+    }
+    return;
+}
