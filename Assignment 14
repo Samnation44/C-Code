@@ -1,25 +1,55 @@
 #include <stdio.h>
-void input(float*x,int*num_terms);
-float e_x(float x,int num_terms);
-void print(float x,float result);
-float fpow(float base,int exp);
+void input(float*x,int*num_terms);       
+float e_x(float x,int num_terms);            //function declarations
+void print(float x,float result); 
+float fpow(float base,int x);
 int fact(int num);
 
 int main() {
-    float x,result;
+    float x,result,a;                   //float and integer declarations
     int num_terms;
-    input(&x,&num_terms);
-
-
+    input(&x,&num_terms);               //gets the power and number of terms
+    result=e_x(x,num_terms);            //gets result
+    print(x,result);                    //prints result
     return 0;
 }
 /****************************/
 void input(float*x,int*num_terms){
-    do{
-        printf("Enter the power to which e is to be raised:");
-        scanf("%f"&*x);
-    }while(x<=0);
-    do{printf("Enter the number of desired terms (from 1 to 12 inclusive):");
-        scanf("%d",&*num_terms);
-    }while(num_terms>12||num_terms<0);
+    printf("Enter the power to which e is to be raised:");
+    scanf("%f",&*x);                                  //this is the exponent
+    do{printf("Enter the number of desired terms (from 1 to 12 inclusive):");  
+        scanf("%d",&*num_terms);                      //this is the number of terms
+    }while(*num_terms>12||*num_terms<1);              //must be from 1 to 12
+    return;
+}
+/****************************/
+float e_x(float x,int num_terms){
+    int i;
+    float term,sum=0;
+    for(i=0;i<num_terms;i++){                        //this loop finds and sums the terms
+        term=fpow(x,i)/(fact(i));
+        sum=sum+term;
+    }
+    return(sum);
+}
+/****************************/
+float fpow(float base,int x){
+    float result=1;
+    int i;
+    for(i=1;i<=x;i++)                             //this loop finds a base raised to a power
+        result=result*base;
+    return(result);
+}
+/****************************/
+int fact(int num){
+    int i,result=1;
+    for(i=1;i<=num;i++){                           //this loop finds the factorial of the input
+        result=result*i;
+    }
+   return(result);
+}
+/****************************/
+void print(float x,float result){
+    printf("e^%.2f is %f",x,result);               //prints the final result
+    return;
 }
