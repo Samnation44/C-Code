@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <limits.h>
+int main(void){
+    FILE* inp;
+    
+    int sum=0,i=0,num,smallest=INT_MAX,largest=INT_MIN;
+    float avg;
+    inp=fopen("file_1.txt","r");
+    if (inp==NULL){
+         printf("\nUnable to open the file");}
+    else{
+        while(fscanf(inp,"%d",&num)!=EOF){
+            if(num<smallest){
+               smallest=num;}
+            if(num>largest){
+                largest=num;}
+            i++;
+            sum=sum+num;
+        }
+
+
+        avg=sum/i;
+        fclose(inp);  
+        printf("The average of the %d numbers is %f \n",i,avg);
+        printf("the maximum value is %d and the minimum value is %d",largest,smallest);
+    }
+    
+
+
+    
+    
+    return(0);
+}
