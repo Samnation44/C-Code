@@ -1,0 +1,56 @@
+#include <stdio.h>
+int get_input(void);
+void get_array(float array[], int size, int array_number);
+void add(float a1[], float a2[], float sum[], int size);
+void out_put(float array1[], float array2[], float sum[], int size);
+
+int main() {
+    float a[10];
+    float b[10];
+    float sum[10];
+    int size,i;
+    
+    size = get_input();
+    printf("%d\n",size);
+    get_array(a,size,1);
+    get_array(b,size,2);
+    add(a,b,sum,size);
+    out_put(a,b,sum,size);
+    
+    
+    return 0;
+}
+int get_input(void){
+    int size,num;
+    do{
+        printf("Enter the size of the arrays (from 1 to 10 inclusive):");
+        size=scanf("%d",&num);
+        while(getchar()!='\n')
+            ;
+    }while(num<1||num>10||size!=1);
+
+    return(num);
+}
+void get_array(float array[], int size, int array_number){
+    int i;
+    printf("Enter the %d values for array %d:",size,array_number);
+    for(i=0;i<size;i++){
+        scanf("%f",&array[i]);
+    }
+    return;
+}
+void add(float a1[], float a2[], float sum[], int size){
+    int i;
+    for(i=0;i<size;i++){
+        sum[i]=a1[i]+a2[i];
+    }
+    return;
+}
+void out_put(float array1[], float array2[], float sum[], int size){
+    int i;
+    printf("array1 array2 sum\n");
+    for(i=0;i<size;i++){
+        printf("%.2f   %.2f   %.2f\n",array1[i],array2[i],sum[i]);
+    }
+    return;
+}
