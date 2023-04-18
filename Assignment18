@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <limits.h>
+int get_avg_max_min();
+void output();
+int main(){
+    float average;
+    int max,min,read_error;
+    read_error=get_avg_max_min();
+    if(!read_error)
+    output();
+
+
+    return(0);
+}
