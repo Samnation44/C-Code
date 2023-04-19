@@ -1,0 +1,71 @@
+#include <stdio.h>
+#define MAX_NUM_STUD 25
+
+void test_avg(float*avg,int test[],int size);
+void test_max_min(int*max,int*min,int test[]);
+void print_test(int test[]);
+int menu();
+int get_scores(int test[],int*num_stud);
+int main(){
+    int choice,max,min,file_opened,num_stud;
+    int test[MAX_NUM_STUD];
+    float avg;
+    file_opened=get_scores(test[],&num_stud);
+    if(file_opened==0){
+        do{
+            choice=menu();
+            switch(choice){
+                case 0:
+                printf("Program is over.");
+                break;
+                //case 1:test_avg(&avg,test);
+                printf("\nAverage score on test: %5.2f\n",avg);
+                break;
+                //case 2:test_max_min(&max,&min);
+                printf("\nMaximum score: %d\nMinumum Score: %d\n",max,min);
+                //case 3:print_test()
+                break;
+                default:
+                printf("This should never happen!\n");
+            }
+        }while(choice!=0);
+    }
+    //printf("%d",num_stud);
+    return(0);
+}
+/********************************************/
+int menu(){
+    int choice,conversions;
+    do{
+        printf("Enter your choice:\n0 Quit 1 Test Average 2 Test Max/Min 3 Print Scores:");
+        conversions=scanf("%d",&choice);
+        while(getchar()!='\n')
+        ;
+    }while(choice!=0 &&choice!=1 && choice!=2 && choice!=3 || conversions!=1);
+    printf("%d",choice);
+    return(choice);
+}
+/********************************************/
+void test_avg(float*avg,int test[],int size){
+    
+    
+    return;
+}
+/********************************************/
+int get_scores(int test[],int*num_stud){
+    FILE*in_file;
+    int i=0;
+    in_file=fopen("Grades.txt","r");
+    if(in_file==NULL){
+        printf("Unable to open file test.txt");
+        return 1;
+    }
+    else{
+        while(fscanf(in_file,"%d",&test[i])!=EOF)
+        i++;
+        *num_stud=i;
+        fclose(in_file);
+        
+    }
+    return(0);
+}
