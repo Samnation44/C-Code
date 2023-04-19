@@ -1,14 +1,39 @@
 #include <stdio.h>
 #include <limits.h>
-int get_avg_max_min();
-void output();
+int get_avg_max_min(int*max,int*min,float*average);
+void output(int max,int min,float average);
 int main(){
     float average;
-    int max,min,read_error;
-    read_error=get_avg_max_min();
+    int max=INT_MIN,min=INT_MAX,read_error;
+    read_error=get_avg_max_min(&max,&min,&average);
     if(!read_error)
-    output();
-
+    output(max,min,average);
 
     return(0);
+}
+/************************/
+int get_avg_max_min(int*max,int*min,float*average){
+    FILE*input;
+    int num,sum=0;
+    float i=0;
+    input=fopen("File1.txt","r");
+    if(input==NULL){
+        printf("Unable to open file File1");
+    }
+    while(fscanf(input,"%d",&num)!=EOF){
+        if(num>*max)
+        *max=num;
+        if(num<*min)
+        *min=num;
+        sum=sum+num;
+        i++;
+    }
+    *average=sum/i;
+    return(0);
+    
+}
+/************************/
+void output(int max,int min,float average){
+    printf("The average is %.3f\n",average);
+    printf("The maximum value is %d and the minimum value is %d",max,min);
 }
