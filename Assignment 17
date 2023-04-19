@@ -1,0 +1,65 @@
+# include <stdio.h>
+void get_choice_and_key(int*choice,int*key);
+void encode(int key);
+void decode(int key);
+int main(){
+    int choice,key;
+    get_choice_and_key(&choice,&key);
+    switch(choice){
+        case 1:
+        encode(key);
+        break;
+        case 2:
+        decode(key);
+        break;
+        defualt:
+        printf("Invalid choice");
+    } 
+}
+void get_choice_and_key(int*choice,int*key){
+    do{
+        printf("Enter 1 to encrypt or 2 to de-encrypt:");
+        scanf("%d",&*choice);
+
+    }while(*choice!=1&&*choice!=2);
+    do{
+        printf("Enter the key (from 0 to 10 inclusive)");
+        scanf("%d",&*key);
+    }while(*key<0||*key>10);
+    return;
+}
+
+void encode(int key){
+    FILE* f_input;
+    FILE* f_output;
+    char c;
+    f_input=fopen("msg.txt","r");
+    if(f_input!=NULL){
+        f_output=fopen("e_msg.txt","w");
+        while((c=fgetc(f_input))!=EOF)
+            fputc(c+key,f_output);
+        fclose(f_input);
+        fclose(f_output);
+        printf("The file 'msg' has been copied to 'e_msg'");
+    }
+    else
+    printf("\nCould not open msg.txt");
+    return;
+}
+void decode(int key){
+    FILE* f_input;
+    FILE* f_output;
+    char c;
+    f_input=fopen("e_msg.txt","r");
+    if(f_input!=NULL){
+        f_output=fopen("d_msg.txt","w");
+        while((c=fgetc(f_input))!=EOF)
+            fputc(c-key,f_output);
+        fclose(f_input);
+        fclose(f_output);
+        printf("The file 'e_msg' has been copied to 'd_msg'");
+    }
+    else
+    printf("\nCould not open msg.txt");
+    return;
+}
