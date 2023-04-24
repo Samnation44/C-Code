@@ -18,7 +18,7 @@ int main(){
                 case 0:printf("Program is over.");
                 break;
                 case 1:test_avg(&avg,test,num_stud);
-                    printf("\nAverage score on test: %f\n",avg);
+                    printf("\nAverage score on test: %.2f\n",avg);
                     break;
                 //case 2:test_max_min(&max,&min,test);
                 //    printf("\nMaximum score: %d\nMinumum Score: %d\n",max,min);
@@ -48,12 +48,12 @@ int menu(){
 /********************************************/
 void test_avg(float*avg,int test[],int size){
     int i,num,sum=0;
-    for(i=0;i<=size;i++){
+    for(i=0;i<size;i++){
         num=test[i];
         sum=num+sum;
     }
-    *avg=sum/size;
-    printf("%d %d %d %d %d",*avg,num,sum,size,avg);
+    *avg=(float)sum/size;
+    //printf("%d %d %d %d %d",*avg,num,sum,size,avg);
     return;
 }
 /********************************************/
