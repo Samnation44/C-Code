@@ -25,13 +25,13 @@ int main(void)
 
   if (get_info(array,&records) == 0)
   {
-    printf("\n Original order:");
+    printf("\nOriginal order:");
     print_info_name(array, records);
     sort_by_name(array, records);
-    printf(" Alphabetical order:");
+    printf("\n\nAlphabetical order:");
     print_info_name(array, records);
     sort_by_id(array, records);
-    printf(" ID number order:");
+    printf("\n\nID number order:");
     print_info_id(array, records);
   }
   else
@@ -40,7 +40,10 @@ int main(void)
 }
 /*******************************************/
 void print_info_name(PERSONAL_INFO array[], int records){
-
+    int i;
+    for(i=0;i<records;i++)
+    printf("\n%-12s %-12s %d %d",array[i].last,array[i].first,array[i].age,array[i].id);
+    return;
 }
 /*******************************************/
 void sort_by_id(PERSONAL_INFO array[], int records){
@@ -55,7 +58,14 @@ void sort_by_id(PERSONAL_INFO array[], int records){
 }
 /*******************************************/
 void sort_by_name(PERSONAL_INFO array[], int records){
-    
+    int i,x;
+    for(i=0;i<records;i++){
+        for(x=records-1;x>0;x--){
+            if(strcmp(array[x].last,array[x-1].last)<0)
+                swap(&array[x],&array[x-1]);
+        }
+    }
+    return;
 }
 /*******************************************/
 int get_info(PERSONAL_INFO array[], int* records){
@@ -63,11 +73,25 @@ int get_info(PERSONAL_INFO array[], int* records){
     int i=0;
     input=fopen("a24.txt","r");
     if(input!=NULL){
-        while(fscanf(input,"%s %d %d",&array[i].name,&array[i].age,&array[i],id)!=EOF){
+        while(fscanf(input,"%s %s %d %d",&array[i].last,&array[i].first,&array[i].age,&array[i].id)!=EOF){
             i++;
         }
-
     }
     fclose(input);
-    return(i);
+    *records=i;
+    return(0);
+}
+/*******************************************/
+void swap(PERSONAL_INFO* a, PERSONAL_INFO* b){
+    PERSONAL_INFO temp;
+    temp=*a;
+    *a=*b;
+    *b=temp;
+    return;
+}
+void print_info_id(PERSONAL_INFO array[], int records){
+    int i;
+    for(i=0;i<records;i++)
+    printf("\n%d %-12s %-12s %d",array[i].id,array[i].last,array[i].first,array[i].age);
+    return;
 }
