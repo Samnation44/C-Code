@@ -2,29 +2,30 @@
 #define MAX_NUM_STUD 25
 
 void test_avg(float*avg,int test[],int size);
-void test_max_min(int*max,int*min,int test[]);
-void print_test(int test[]);
+void test_max_min(int*max,int*min,int test[],int size);
+void print_test(int test[],int size);
 int menu();
 int get_scores(int test[],int*num_stud);
 int main(){
-    int choice,max,min,file_opened,num_stud;
+    int choice,max=0,min=100,file_opened,num_stud;
     int test[MAX_NUM_STUD];
     float avg;
     file_opened=get_scores(test,&num_stud);
     if(file_opened==0){
         do{
             choice=menu();
+            
             switch(choice){
                 case 0:printf("Program is over.");
                 break;
                 case 1:test_avg(&avg,test,num_stud);
                     printf("\nAverage score on test: %.2f\n",avg);
                     break;
-                //case 2:test_max_min(&max,&min,test);
-                //    printf("\nMaximum score: %d\nMinumum Score: %d\n",max,min);
-                //    break;
-                //case 3:print_test()
-                //break;
+                case 2:test_max_min(&max,&min,test,num_stud);
+                    printf("\nMaximum score: %d\nMinumum Score: %d\n",max,min);
+                    break;
+                case 3:print_test(test,num_stud);
+                break;
                 default:
                     printf("This should never happen!\n");
             }
@@ -42,7 +43,7 @@ int menu(){
         while(getchar()!='\n')
         ;
     }while(choice!=0 &&choice!=1 && choice!=2 && choice!=3);
-    //printf("%d",choice);
+    
     return(choice);
 }
 /********************************************/
@@ -53,7 +54,6 @@ void test_avg(float*avg,int test[],int size){
         sum=num+sum;
     }
     *avg=(float)sum/size;
-    //printf("%d %d %d %d %d",*avg,num,sum,size,avg);
     return;
 }
 /********************************************/
@@ -74,4 +74,27 @@ int get_scores(int test[],int*num_stud){
         return(0);
     }
     
+}
+/********************************************/
+void test_max_min(int*max,int*min,int test[],int size){
+    int i,num;
+    for(i=0;i<size;i++){
+        num=test[i];
+        if (num>*max){
+        *max=num;}
+        if(num<*min){
+            *min=num;}
+        
+       
+    }
+    
+    return;
+}
+/********************************************/
+void print_test(int test[],int size){
+    int i;
+    printf("\nStudent#  Score\n");
+    for(i=0;i<size;i++){
+        printf("%d       %d\n",i+1,test[i]);
+    }
 }
