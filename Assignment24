@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <string.h>
+#define MAX_RECORDS 25 // Maximum number 
+                       // of rows in a24.dat  
+
+typedef struct
+{
+  char last[10];  //What are the longest names
+  char first[10]; // the program can handle?
+  int age;
+  int id;
+} PERSONAL_INFO;
+
+int get_info(PERSONAL_INFO array[], int* records); 
+void print_info_name(PERSONAL_INFO array[], int records); 
+void print_info_id(PERSONAL_INFO array[], int records);
+void sort_by_id(PERSONAL_INFO array[], int records); 
+void sort_by_name(PERSONAL_INFO array[], int records); 
+void swap(PERSONAL_INFO* a, PERSONAL_INFO* b);
+
+int main(void)
+{
+  PERSONAL_INFO array[MAX_RECORDS];
+  int records;
+
+  if (get_info(array,&records) == 0)
+  {
+    printf("\n Original order:");
+    print_info_name(array, records);
+    sort_by_name(array, records);
+    printf(" Alphabetical order:");
+    print_info_name(array, records);
+    sort_by_id(array, records);
+    printf(" ID number order:");
+    print_info_id(array, records);
+  }
+  else
+    printf("\nThere was a problem\n\n");
+  return 0;
+}
+/*******************************************/
+void print_info_name(PERSONAL_INFO array[], int records){
+
+}
+/*******************************************/
+void sort_by_id(PERSONAL_INFO array[], int records){
+    int i,x;
+    for(i=0;i<records;i++){
+        for(x=records-1;x>0;x--){
+            if(array[x].id<array[x-1].id)
+                swap(&array[x],&array[x-1]);
+        }
+    }
+    return;
+}
+/*******************************************/
+void sort_by_name(PERSONAL_INFO array[], int records){
+    
+}
+/*******************************************/
+int get_info(PERSONAL_INFO array[], int* records){
+    FILE*input;
+    int i=0;
+    input=fopen("a24.txt","r");
+    if(input!=NULL){
+        while(fscanf(input,"%s %d %d",&array[i].name,&array[i].age,&array[i],id)!=EOF){
+            i++;
+        }
+
+    }
+    fclose(input);
+    return(i);
+}
