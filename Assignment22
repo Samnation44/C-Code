@@ -1,0 +1,76 @@
+#include <stdio.h>
+#define MAX_ROWS 20
+#define MAX_COLS 30
+int get_info(int*rows,int*cols,int scores[][MAX_COLS]);
+void print_all(int rows,int cols,int scores[][MAX_COLS]);
+int add_score(int rows,int cols,int scores[][MAX_COLS]);
+void update_file(int rows,int cols,int scores[][MAX_COLS]);
+
+int main(){
+    int rows,cols,scores[MAX_ROWS][MAX_COLS];
+    if(get_info(&rows,&cols,scores)==0){
+        print_all(rows,cols,scores);
+        cols=add_score(rows,cols,scores);
+        print_all(rows,cols,scores);
+        update_file(rows,cols,scores);
+    }
+    else
+    printf("\nThe file failed to open for reading.");
+    return 0;
+}
+/***********************************************/
+int get_info(int*rows,int*cols,int scores[][MAX_COLS]){
+    FILE*input;
+    int r,c;
+    input=fopen("a22.txt","r");
+    if(input!=NULL){
+        fscanf(input,"%d %d",rows,cols);
+
+        for(r=0;r<*rows;r++)
+            for(c=0;c<*cols;c++)
+                fscanf(input,"%d",&scores[r][c]);
+    fclose(input);
+    return 0;
+    }
+    else
+    return 1;
+}
+/***********************************************/
+void print_all(int rows,int cols,int scores[][MAX_COLS]){
+    int i,r,c;
+
+    for(i=0;i<cols;i++){
+        printf("%5d",i);
+    }
+    for(r=0;r<rows;r++){
+        printf("\n%d",r);
+        for(c=0;c<cols;c++){
+            printf("%5d",scores[r][c]);
+        }
+    }
+}
+/***********************************************/
+int add_score(int rows,int cols,int scores[][MAX_COLS]){
+    int i;
+    printf("\nEnter the 3 scores for test %d:",cols);
+    for(i=0;i<rows;i++){
+        scanf("%d",&scores[i][cols]);
+    }
+    
+    
+    return (cols+1);
+}
+/***********************************************/
+void update_file(int rows,int cols,int scores[][MAX_COLS]){
+    FILE*output;
+    int r,c;
+    output=fopen("a22.txt","w");
+    fprintf(output,"%d %d\n",rows,cols);
+    for(r=0;r<rows;r++){
+        for(c=0;c<cols;c++)
+        fprintf(output,"%5d",scores[r][c]);
+    fprintf(output,"\n");
+    }
+    fclose(output);
+
+}
