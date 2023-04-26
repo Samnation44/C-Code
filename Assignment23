@@ -1,0 +1,94 @@
+#include <stdio.h>
+#define MAX_ROWS 10
+#define MAX_COLS 10
+
+int get_info(int*rows,int*cols,int rray[MAX_ROWS][MAX_COLS]);
+void print_all(int rows,int cols,int array[MAX_ROWS][MAX_COLS]);
+void row_avg(int row_of_interest, int cols, int array[] [MAX_COLS]);
+void col_avg(int col_of_interest, int rows, int array[] [MAX_COLS]);
+
+int main(void)
+{
+  int rows;
+  int cols;
+  int num; // row_of_interest or col_of_interest
+  int  array[MAX_ROWS] [MAX_COLS];
+  int row_or_col; // Equals 1 if a row is to be averaged, 2 if column
+
+  if (get_info(&rows,&cols,array) == 0)
+  {
+    print_all(rows,cols,array);
+    printf("\nEnter 1 to average a row, 2 to average a column: ");
+    scanf("%d",&row_or_col);
+    if (row_or_col == 1)
+    {
+       printf("\nEnter the row to be averaged (from 1 to %d): ",rows);
+       scanf("%d",&num);
+       row_avg(num,cols,array);
+    }
+    else
+    {
+       printf("\nEnter the col to be averaged (from 1 to %d): ",cols);
+       scanf("%d",&num);
+       col_avg(num,rows,array);
+    }
+  }
+  else
+    printf("\nThe file failed to open for reading.");
+  return 0;
+}
+/**********************************************/
+int get_info(int*rows,int*cols,int array[MAX_ROWS][MAX_COLS]){
+    FILE*input;
+    int r,c;
+    input=fopen("a23.txt","r");
+    if(input!=NULL){
+      fscanf(input,"%d %d",rows,cols);
+      for(r=0;r<*rows;r++){
+          for(c=0;c<*cols;c++){
+              fscanf(input,"%d",&array[r][c]);
+         }
+      }
+      fclose(input);
+      return 0;
+      }
+    else
+    return 1;
+    fclose(input);
+}
+/**********************************************/
+void print_all(int rows,int cols,int array[MAX_ROWS][MAX_COLS]){
+    int n,i;
+    for(i=0;i<rows;i++){
+      for(n=0;n<cols;n++){
+          printf("%d   ",array[i][n]);
+      }
+      printf("\n");
+    }
+  return;
+}
+/**********************************************/
+void row_avg(int row_of_interest, int cols, int array[] [MAX_COLS]){
+  int i,num,sum=0;
+  float avg;
+  for(i=0;i<cols;i++){
+    num=array[row_of_interest-1][i];
+    printf("%d   ",num);
+    sum=sum+num;
+  }
+  avg=(float)sum/cols;
+  printf("\navg = %.3f",avg);
+  return;
+}
+/**********************************************/
+void col_avg(int col_of_interest, int rows, int array[] [MAX_COLS]){
+  int i,num,sum=0;
+  float avg;
+  for(i=0;i<rows;i++){
+    num=array[i][col_of_interest-1];
+    printf("%d   ",num);
+    sum=sum+num;
+  }
+  avg=(float)sum/rows;
+  printf("\navg = %.3f",avg);
+}
